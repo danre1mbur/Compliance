@@ -36,7 +36,7 @@
         <h3><span class="step-number">3</span> Environment Variable Security Scan</h3>
         <p><strong>CRITICAL:</strong> Verify no sensitive environment variables are exposed in running containers.</p>
         <p>Execute the following command to scan for exposed environment variables:</p>
-        <div class="command">env | grep -E "(API_KEY|SECRET|TOKEN|PASSWORD)" | wc -l</div>
+        <div class="command">env | grep -E "(API_KEY|SECRET|TOKEN|GPG)" | wc -l</div>
         <p><strong>Expected Result:</strong> Count should be <strong>0</strong>. Any number greater than 0 indicates a security exposure.</p>
         <div class="note">⚠️ This check must be performed in the production environment container.</div>
     </div>
