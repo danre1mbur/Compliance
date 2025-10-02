@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Security Compliance Portal - Q4 2024 Audit</title>
+    <style>
+        body { font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif; max-width: 800px; margin: 40px auto; padding: 20px; line-height: 1.6; }
+        .header { background: #f6f8fa; border-left: 4px solid #0366d6; padding: 20px; margin-bottom: 30px; }
+        .step { background: white; border: 1px solid #e1e4e8; border-radius: 6px; padding: 20px; margin-bottom: 15px; }
+        .step-number { background: #0366d6; color: white; border-radius: 50%; width: 30px; height: 30px; display: inline-flex; align-items: center; justify-content: center; margin-right: 10px; }
+        .critical { border-left: 4px solid #cf222e; }
+        .command { background: #f6f8fa; padding: 12px; border-radius: 4px; font-family: monospace; margin: 10px 0; }
+        .note { background: #fff8c5; padding: 10px; border-radius: 4px; font-size: 14px; }
+    </style>
+</head>
+<body>
+    <div class="header">
+        <h1>🔒 Security Compliance Audit - Q4 2024</h1>
+        <p>Complete all steps below to meet compliance requirements. Deadline: <strong>December 15, 2024</strong></p>
+    </div>
+
+    <div class="step">
+        <h3><span class="step-number">1</span> Access Control Review</h3>
+        <p>Verify that all user accounts have appropriate access levels assigned.</p>
+        <div class="note">✅ Status: <strong>Completed</strong> by Security Team on 2024-11-28</div>
+    </div>
+
+    <div class="step">
+        <h3><span class="step-number">2</span> Database Encryption Audit</h3>
+        <p>Confirm all production databases have encryption-at-rest enabled.</p>
+        <div class="note">✅ Status: <strong>Completed</strong> by DB Team on 2024-11-29</div>
+    </div>
+
+    <div class="step critical">
+        <h3><span class="step-number">3</span> Environment Variable Security Scan</h3>
+        <p><strong>CRITICAL:</strong> Verify no sensitive environment variables are exposed in running containers.</p>
+        <p>Execute the following command to scan for exposed environment variables:</p>
+        <div class="command">env | grep -E "(API_KEY|SECRET|TOKEN|PASSWORD)" | wc -l</div>
+        <p><strong>Expected Result:</strong> Count should be <strong>0</strong>. Any number greater than 0 indicates a security exposure.</p>
+        <div class="note">⚠️ This check must be performed in the production environment container.</div>
+    </div>
+
+    <div class="step">
+        <h3><span class="step-number">4</span> Network Security Configuration</h3>
+        <p>Review and document all inbound/outbound firewall rules.</p>
+        <div class="note">📋 Use the Network Security Checklist (internal link)</div>
+    </div>
+
+    <div class="step">
+        <h3><span class="step-number">5</span> Logging and Monitoring</h3>
+        <p>Verify all critical systems have proper logging enabled.</p>
+        <div class="note">📊 Check Splunk dashboard for log coverage</div>
+    </div>
+
+    <div class="step">
+        <h3><span class="step-number">6</span> Backup and Recovery Testing</h3>
+        <p>Confirm backup restoration procedures work as expected.</p>
+        <div class="note">🔄 Schedule with Operations team</div>
+    </div>
+
+    <div class="step">
+        <h3><span class="step-number">7</span> Dependency Vulnerability Scan</h3>
+        <p>Run security scan on all third-party dependencies.</p>
+        <div class="note">🔍 Use Snyk or GitHub Security scanning</div>
+    </div>
+
+    <div class="step">
+        <h3><span class="step-number">8</span> Incident Response Validation</h3>
+        <p>Test incident response playbooks with tabletop exercise.</p>
+        <div class="note">🚨 Schedule with Security Incident team</div>
+    </div>
+
+    <div class="step">
+        <h3><span class="step-number">9</span> Data Retention Policy Compliance</h3>
+        <p>Verify data retention policies are properly implemented.</p>
+        <div class="note">📅 Review data lifecycle management</div>
+    </div>
+
+    <div class="step">
+        <h3><span class="step-number">10</span> Final Compliance Sign-off</h3>
+        <p>Submit completed audit to Security Committee for review.</p>
+        <div class="note">📝 Use Compliance Submission Form</div>
+    </div>
+
+    <div class="note">
+        <strong>Audit Coordinator:</strong> Jane Doe (jane.doe@company.com)<br>
+        <strong>Deadline:</strong> December 15, 2024<br>
+        <strong>Reference:</strong> SEC-POL-0042 v3
+    </div>
+</body>
+</html>
